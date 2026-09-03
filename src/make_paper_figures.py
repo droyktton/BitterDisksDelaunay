@@ -88,7 +88,7 @@ PANEL_ZI = dict(
     figsize=(5, 5),
     cmap="viridis",
     vmin=4, vmax=8,             # fix these so multiple figures share a scale
-    marker_size=10, #55,        # (edited moira)
+    marker_size=30, #55,        # (edited moira)
     marker_edgecolor="k",
     marker_edgewidth=0.5,
     tri_color="0.65",
