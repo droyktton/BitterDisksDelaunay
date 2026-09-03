@@ -289,22 +289,6 @@ def save_particle_data_csv(path, pts, zi, qi, hull_mask):
             writer.writerow([x, y, int(z), int(q), int(h)])
 
 
-def save_histogram_csv(path, values, value_label="value"):
-    """
-    Save integer-valued histogram counts (e.g. z_i or q_i) as a CSV with
-    columns [value_label, count]. Every integer in the observed range is
-    included (with count 0 if it doesn't occur), so bar charts made from
-    the file don't have gaps.
-    """
-    values = np.asarray(values)
-    vmin, vmax = int(values.min()), int(values.max())
-    with open(path, "w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow([value_label, "count"])
-        for v in range(vmin, vmax + 1):
-            writer.writerow([v, int(np.sum(values == v))])
-
-
 # ==========================================================================
 # Interactive application
 # ==========================================================================
@@ -456,14 +440,8 @@ class TopologyApp:
         p5 = os.path.join(self.export_dir, f"data_{tag}.csv")
         save_particle_data_csv(p5, pts, zi, qi, hull_mask)
 
-        # histogram bin counts
-        p6 = os.path.join(self.export_dir, f"hist_zi_{tag}.csv")
-        save_histogram_csv(p6, zi, value_label="z_i")
-        p7 = os.path.join(self.export_dir, f"hist_qi_{tag}.csv")
-        save_histogram_csv(p7, qi, value_label="q_i")
-
         print(f"Exported {len(pts)}-particle view to '{self.export_dir}/':")
-        for p in (p1, p2, p3, p4, p5, p6, p7):
+        for p in (p1, p2, p3, p4, p5):
             print(f"  {p}")
         print("Edit make_paper_figures.py (or call plot_triangulation_panel / "
               "plot_histogram directly) to re-style any of these individually.")

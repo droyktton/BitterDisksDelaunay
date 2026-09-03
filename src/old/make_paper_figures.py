@@ -29,7 +29,6 @@ import matplotlib.pyplot as plt
 from delaunay_topology import (
     load_points, compute_topology, peel_convex_hull, filter_by_radius,
     plot_triangulation_panel, plot_histogram, save_particle_data_csv,
-    save_histogram_csv,
 )
 
 # ==========================================================================
@@ -186,10 +185,10 @@ def main():
 
     # --- Panel 1: z_i triangulation ---------------------------------
     fig1, ax1, _ = plot_triangulation_panel(
-        points, tri, zi, hull_mask=hull_mask, shade_qi=qi, 
+        points, tri, zi, hull_mask=hull_mask, shade_qi=qi,
         marker_mask=(zi != 6),   # only draw dots for defective vertices 
         **PANEL_ZI)
-
+	
     ax1.axis("off") # Moira edited
 
     out1 = os.path.join(output_dir, f"triangulation_zi.{OUTPUT_FORMAT}")
@@ -198,12 +197,16 @@ def main():
 
     # --- Panel 2: q_i triangulation ---------------------------------
     fig2, ax2, _ = plot_triangulation_panel(
-        points, tri, qi, hull_mask=hull_mask, 
-        marker_mask=(qi != 0),   # only draw dots for defective vertices
-        **PANEL_QI)
+    	points, tri, qi, hull_mask=hull_mask,
+    	marker_mask=(qi != 0),   # only draw dots for defective vertices
+    	**PANEL_QI)
 
     ax2.axis("off") # Moira edited
 
+    # old showing circles on all vertices	
+    #fig2, ax2, _ = plot_triangulation_panel(
+    #    points, tri, qi, hull_mask=hull_mask, **PANEL_QI)
+   
     out2 = os.path.join(output_dir, f"triangulation_qi.{OUTPUT_FORMAT}")
     fig2.savefig(out2, bbox_inches="tight")
     print(f"Saved {out2}")
@@ -226,15 +229,6 @@ def main():
     out5 = os.path.join(output_dir, "data.csv")
     save_particle_data_csv(out5, points, zi, qi, hull_mask)
     print(f"Saved {out5}")
-
-    # --- Histogram bin counts (value, count) --------------------------
-    out6 = os.path.join(output_dir, "hist_zi.csv")
-    save_histogram_csv(out6, zi, value_label="z_i")
-    print(f"Saved {out6}")
-
-    out7 = os.path.join(output_dir, "hist_qi.csv")
-    save_histogram_csv(out7, qi, value_label="q_i")
-    print(f"Saved {out7}")
 
     plt.show()  # comment out if running non-interactively / on a cluster
 
