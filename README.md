@@ -1,4 +1,4 @@
-# BitterDisksDelaunay
+## BitterDisksDelaunay
 
 A small project for generating Bitter-style disk patterns and analyzing them with Delaunay triangulation.
 
