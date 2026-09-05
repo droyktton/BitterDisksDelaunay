@@ -236,7 +236,7 @@ def main():
     save_histogram_csv(out7, qi, value_label="q_i")
     print(f"Saved {out7}")
 
-    plt.show()  # comment out if running non-interactively / on a cluster
+    #plt.show()  # comment out if running non-interactively / on a cluster
 
 
 if __name__ == "__main__":
