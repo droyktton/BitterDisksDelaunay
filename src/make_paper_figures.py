@@ -48,7 +48,7 @@ def _parse_args():
                     help="Path to the two-column (x y) data file "
                          "(default: 'name.dat', or the CONFIGURE value below)")
     p.add_argument("--radius", type=float, default=None,
-                    help="Radius cutoff from the center of mass "
+                    help="Radius cutoff from the  of mass "
                          "(overrides RADIUS_CUTOFF below)")
     p.add_argument("--peels", type=int, default=None,
                     help="Number of convex-hull layers to peel "
@@ -101,8 +101,8 @@ PANEL_ZI = dict(
                                   # of color-by-charge; overrides shade_cmap
     show_hull=False, #True (after moira)
     hull_color="lime",
-    show_com=True,
-    colorbar=True,
+    show_com=False, #True, (after Moira)
+    colorbar=False, #True, (after Moira)
     cbar_label=r"$z_i$",
     title=None,                  # set to a string, or leave None for no title
 )
@@ -120,8 +120,8 @@ PANEL_QI = dict(
     shade_defects=False,
     show_hull=False, #True, (after Moira)
     hull_color="lime",
-    show_com=True,
-    colorbar=True,
+    show_com=False, #True, (after Moira)
+    colorbar=False, #True, (after Moira)
     cbar_label=r"$q_i$",
     show_legend=True,
     title=None,
